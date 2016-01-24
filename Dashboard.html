@@ -1,0 +1,35 @@
+<button class="btn btn-link" ng-click="exportToExcel('#Emptable')">
+        <span class="glyphicon glyphicon-share"></span> Export to Excel
+    </button>
+	<button  class="btn btn-link" href="#">
+          <span class="glyphicon glyphicon-edit"></span> Edit 
+        </button >
+		
+		<button  class="btn btn-link" href="http://localhost:8080/Emp/Index.html#/AddEmp"><span class="glyphicon glyphicon-plus" ></span> Add</button>
+<div style="text-align:right"> <input type = "text" ng-model = "search" placeholder="Search"></div>
+<div >
+<table id="Emptable" class="table">
+<tr>
+<th>Name</th>
+<th>TCS ID</th>
+<th>RBC ID</th>
+<th>Email ID</th>
+<th>Mobile</th>
+<th>Asset ID</th>
+<th>VDI ID</th>
+</tr>
+<tr ng-repeat="emp in EmpData | filter:search">
+<td>{{emp.txtName}}</td>
+<td>{{emp.txtTCSID}}</td>
+<td>{{emp.txtRBCID}}</td>
+<td>{{emp.txtEmail}}</td>
+<td>{{emp.txtAsset}}</td>
+<td>{{emp.txtMobile}}</td>
+<td>{{emp.txtVDI}}</td>
+<td>
+<a  href="#" ng-click="edit(todo.txt1)">edit</a> 
+<a href="#" ng-click="delete(todo.txt1)">delete</a>
+</td>
+</tr>
+</table> 
+</div>

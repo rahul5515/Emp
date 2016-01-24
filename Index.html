@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="shortcut icon" href="img.ico" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<style type="text/css">
+body
+{
+
+}
+.colorgraph {
+height: 5px;
+	border-top: 0;
+background: #c4e17f;
+	border-radius: 5px;
+	background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+.table { border: 1px solid #2980B9; }
+.table thead > tr > th { border-bottom: none; }
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td { border: 1px solid #2980B9; }
+
+
+.glyphicon {
+	font-size: 30px;
+}
+.green {
+	background-color: #5cb85c;
+color:white
+}
+
+.red {
+	background-color:red;
+color:white
+}
+
+.amber {
+	background-color:#ffbf00;
+color:white
+}
+#option1 {
+color: green;
+}
+#option2 {
+color: #ffbf00;
+}
+
+#option3 {
+color: red;
+}
+
+
+
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script src="angular-route.js"></script>
+<script src="app.js"></script>
+
+<script>
+
+(function (i, s, o, g, r, a, m) {
+       i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+           (i[r].q = i[r].q || []).push(arguments)
+       }, i[r].l = 1 * new Date(); a = s.createElement(o),
+       m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+   })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+ 
+   ga('create', 'UA-XXXXXX', 'auto'); 
+// ga('send', 'pageview');
+
+function he()
+{
+	var x=document.getElementById('table').outerHTML;
+	debugger;
+	alert(document.getElementById('table').outerHTML);
+}
+function hell()
+{
+
+	$.fn.serializeObject = function()
+	{
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+
+
+	var x=(JSON.stringify($('form').serializeObject()));
+	$('#result').text(JSON.stringify($('form').serializeObject()));
+	alert('Data Saved');
+	var obj = {};
+
+	//do some processing here which adds some properties to obj like
+
+	$.ajax({
+url: 'json.php',
+data: {json : x, par:'a'},
+dataType:'json' ,
+type: "POST",
+success:function(data)
+		{
+			alert('hello');
+		}
+	});
+}
+
+$("[id$=btnExport]").click(function(e) {
+alert("hi");
+    window.open('data:application/vnd.ms-excel,' + $('div[id$=Emptable]').html());
+    e.preventDefault();
+});
+
+</script>
+</head>
+<body ng-app="App" ng-controller="TodoCtrl" >
+
+<div class="container">
+<!-- <div  style="color:#094AB2">
+<h1>Commercial Dashboard BI</h1>
+<p style="margin-top:-4px">RBC Captail Market</p> 
+</div>
+-->
+<div class="row">
+<div class="col-md-6" style="color:#094AB2" > <h1>Employee Dashboard BI</h1>
+<p style="margin-top:-4px">RBC Captail Market</p> </div>
+<div ng-repeat="emp in EmpData | limitTo:-1" class="col-md-4 col-md-offset-2" style="text-align:right">Last Updated: {{emp.date}}</div>
+</div>  
+<hr class="colorgraph">
+<div class="row">
+<!--<button  class="btn btn-link" ng-href="#/AddEmp"><span class="glyphicon glyphicon-plus" ></span> Add</button>-->
+<div class="col-sm-2" style="background-color:#f6f6f6;height:auto" ng-show="false">
+<div >
+<label>Name</label>
+            <input type="text" name="name" ng-model="newEmployee.txt1"/>
+            <label>Address</label>
+            <input type="text" name="address" ng-model="newEmployee.UAO1"/>
+            
+            <input type="hidden" ng-model="newEmployee.id" />
+            <input type="button" value="Save" ng-click="saveRecord()" class="btn btn-primary"/></div>
+            <br />
+            <br />
+
+<table class="table">
+<tr>
+<th>Id</th>
+<th>Title</th>
+<th></th>
+</tr>
+<tr ng-repeat="todo in todos">
+<td><a href="#ShowDetail/{{todo.date}}">{{todo.UAO1}}</a></td>
+<td>{{todo.txt1}}</td>
+<td>
+                        <a  href="#" ng-click="edit(todo.txt1)">edit</a> | 
+                        <a href="#" ng-click="delete(todo.txt1)">delete</a>
+                    </td>
+
+</tr>
+</table> 
+<div>
+
+<ul class="nav">
+<li><a href="#Dbhk"> <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></a></li>
+<li><a href="#Add"> <span class="glyphicon glyphicon-plus" ></span> </a></li>	
+<!-- <li><a href="#Show"> Show</a></li> -->
+</ul>
+</div>
+</div>
+<div class="col-sm-12">
+<div ng-view></div>   
+</div>
+<div class="col-sm-8">
+
+</div> 
+
+</div>
+
+</div>
+</div>
+</body>
+</html>
